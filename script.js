@@ -31,9 +31,9 @@ function populateCards() {
     // Create the selection of which card are going to be in game and adds them to a array
     for(i = 0; i < cards / 2; i++) {
         const cardGenerator = `
-            <div class="card" onclick="flipCard(this)">
-                <img src="./assets/img/back.png" alt="back" class="back">
-                <img src="./assets/img/cards-possibilities/${availableCards[i]}.gif" alt="back" class="hidden">
+            <div class="card" onclick="flipCard(this)" data-test="card">
+                <img src="./assets/img/back.png" alt="back" class="back" data-test"face-down-image">
+                <img src="./assets/img/cards-possibilities/${availableCards[i]}.gif" alt="back" class="hidden" data-test="face-up-image">
             </div>
         `
         for(j = 0; j < 2; j++) {
