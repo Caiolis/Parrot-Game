@@ -1,6 +1,7 @@
 // Global Variables
 let cards = 0
 const board = document.querySelector('.cards-container')
+let temp = null
 
 const availableCards = [
     'revertitparrot', 
@@ -12,6 +13,7 @@ const availableCards = [
     'explodyparrot'
 ]
 const inBoardCards = []
+const clickedCards = []
 
 // Ask how many cards the user wants to play and check if that number is valid
 function verify() {
@@ -25,9 +27,9 @@ function populateCards() {
     // Create the selection of which card are going to be in game and adds them to a array
     for(i = 0; i < cards / 2; i++) {
         const cardGenerator = `
-            <div class="card">
+            <div class="card" onclick="flipCard(this)">
                 <img src="./assets/img/back.png" alt="back" class="back">
-                <img src="./assets/img/cards-possibilities/${availableCards[i]}.gif" alt="back" class="front">
+                <img src="./assets/img/cards-possibilities/${availableCards[i]}.gif" alt="back" class="hidden">
             </div>
         `
         for(j = 0; j < 2; j++) {
@@ -51,5 +53,46 @@ function shuffleArray(array) {
     }
 }
 
+// Flips the card when clicks
+function flipCard(card) {
+    card.classList.add('flip')
+
+    if(card.children[1].classList.contains('hidden')) {
+        card.children[1].classList.remove('hidden')
+        card.children[0].classList.add('hidden')
+    }
+    
+    areTheSame(card)
+}
+
+// Verify if two clicked cards are the same and unflips them if they are not
+function areTheSame(card) {
+
+    if(temp == null) {
+        card.setAttribute('onclick', " ")
+        temp = card
+    } else if(temp.innerHTML == card.innerHTML) {
+        card.setAttribute('onclick', " ")
+        temp = null
+        
+    } else {
+        // Unflip the card if it's not the same as the previous clicked
+        setTimeout((clickedCard, clickedTemp) => {
+            clickedCard.classList.remove('flip')
+            clickedCard.children[1].classList.add('hidden')
+            clickedCard.children[0].classList.remove('hidden')
+            clickedCard.setAttribute('onclick', "flipCard(this)")
+
+            clickedTemp.classList.remove('flip')
+            clickedTemp.children[1].classList.add('hidden')
+            clickedTemp.children[0].classList.remove('hidden')
+            clickedTemp.setAttribute('onclick', "flipCard(this)")
+            temp = null
+        }, "1000", card, temp)
+        temp = null
+    }
+}
+
+// Running all the functions
 verify()
 populateCards()

@@ -39,8 +39,12 @@
     width: 100px;
 }
 
-.front {
+.hidden {
     display: none;
+}
+
+.flip {
+    transform: rotateY(180deg);
 }
 
 @media (max-width: 500px) {
