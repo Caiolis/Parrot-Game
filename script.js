@@ -106,7 +106,7 @@ function areTheSame(card) {
 function hasWinner() {
     if(win == cards / 2) {
         setTimeout(() => {
-            alert(`You won the game in ${plays} plays! The duration of the game was ${timer} seconds`)
+            alert(`Você ganhou em ${plays} jogadas! A duração do jogo foi de ${timer} segundos`)
         }, 500)
         setTimeout(playAgain(), 500)
         clearInterval(hourSpan)
