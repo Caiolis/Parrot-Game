@@ -1,8 +1,11 @@
 // Global Variables
-let cards = 0
+let timer = 0
+let plays = 0
 let win = 0
+let cards = 0
 let temp = null
 const board = document.querySelector('.cards-container')
+const clock = document.querySelector('.timer span')
 
 const availableCards = [
     'revertitparrot', 
@@ -44,6 +47,8 @@ function populateCards() {
     for(i = 0; i < cards; i++) {
         board.innerHTML += inBoardCards[i]
     }
+
+    handleTimer()
 }
 
 // Function to shuffle the cards
@@ -63,6 +68,8 @@ function flipCard(card) {
         card.children[0].classList.add('hidden')
     }
     
+    plays++
+
     areTheSame(card)
     hasWinner()
 }
@@ -99,9 +106,10 @@ function areTheSame(card) {
 function hasWinner() {
     if(win == cards / 2) {
         setTimeout(() => {
-            alert('You Win!')
+            alert(`You won the game in ${plays} plays! The duration of the game was ${timer} seconds`)
         }, 500)
         setTimeout(playAgain(), 500)
+        clearInterval(hourSpan)
     }
 }
 
@@ -112,6 +120,14 @@ function playAgain() {
     if(play.toLowerCase() == 'sim') {
         location.reload()
     }
+}
+
+// Handles the time counting
+function handleTimer() {
+    hourSpan = setInterval(() => {
+        timer++
+        clock.innerHTML = timer
+    }, 1000)
 }
 
 // Running all the functions
