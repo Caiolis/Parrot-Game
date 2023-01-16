@@ -39,6 +39,13 @@
     width: 100px;
 }
 
+.timer {
+    color: #75B79E;
+    font-weight: 700;
+    font-size: 56px;
+    margin-top: 80px;    
+}
+
 .hidden {
     display: none;
 }

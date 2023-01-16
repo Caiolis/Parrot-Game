@@ -1,7 +1,8 @@
 // Global Variables
 let cards = 0
-const board = document.querySelector('.cards-container')
+let win = 0
 let temp = null
+const board = document.querySelector('.cards-container')
 
 const availableCards = [
     'revertitparrot', 
@@ -63,6 +64,7 @@ function flipCard(card) {
     }
     
     areTheSame(card)
+    hasWinner()
 }
 
 // Verify if two clicked cards are the same and unflips them if they are not
@@ -74,7 +76,7 @@ function areTheSame(card) {
     } else if(temp.innerHTML == card.innerHTML) {
         card.setAttribute('onclick', " ")
         temp = null
-        
+        win++        
     } else {
         // Unflip the card if it's not the same as the previous clicked
         setTimeout((clickedCard, clickedTemp) => {
@@ -90,6 +92,25 @@ function areTheSame(card) {
             temp = null
         }, "1000", card, temp)
         temp = null
+    }
+}
+
+// Verify if the play has already won or not
+function hasWinner() {
+    if(win == cards / 2) {
+        setTimeout(() => {
+            alert('You Win!')
+        }, 500)
+        setTimeout(playAgain(), 500)
+    }
+}
+
+// Ask if the play wants to play again, if so restarts the game
+function playAgain() {
+    const play = prompt('Would you like to play again? (Please use sim or não to answer)')
+    
+    if(play.toLowerCase() == 'sim') {
+        location.reload()
     }
 }
 
