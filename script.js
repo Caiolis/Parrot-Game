@@ -17,7 +17,6 @@ const availableCards = [
     'explodyparrot'
 ]
 const inBoardCards = []
-const clickedCards = []
 
 // Ask how many cards the user wants to play and check if that number is valid
 function verify() {
@@ -28,7 +27,7 @@ function verify() {
 
 // Populate the cards container div with the number of cards that the player wishes to play
 function populateCards() {      
-    // Create the selection of which card are going to be in game and adds them to a array
+    // Create the cards and push them to the board array
     for(i = 0; i < cards / 2; i++) {
         const cardGenerator = `
             <div class="card" onclick="flipCard(this)" data-test="card">
@@ -41,6 +40,8 @@ function populateCards() {
         }
 
     }
+
+    // Shuffle the cards so the sequence it's always random
     shuffleArray(inBoardCards)
 
     // Add the cards to the board
@@ -48,6 +49,7 @@ function populateCards() {
         board.innerHTML += inBoardCards[i]
     }
 
+    // Starts the timer right after the cards have been dealt
     handleTimer()
 }
 
